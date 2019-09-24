@@ -17,6 +17,12 @@ defmodule HarryPotter do
   giving as big a discount as possible.
   """
 
-  def price(_) do
+  def price([]) do
+    0
   end
+
+  def price([_]) do
+    8
+  end
+
 end

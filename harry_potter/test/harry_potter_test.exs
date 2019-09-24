@@ -6,22 +6,18 @@ defmodule HarryPotterTest do
     assert HarryPotter.price([]) == 0
   end
 
-  @tag :skip
   test "cart with the first tome" do
     assert HarryPotter.price([1]) == 8
   end
 
-  @tag :skip
   test "cart with the second tome" do
     assert HarryPotter.price([2]) == 8
   end
 
-  @tag :skip
   test "cart with the third tome" do
     assert HarryPotter.price([3]) == 8
   end
 
-  @tag :skip
   test "cart with the fourth tome" do
     assert HarryPotter.price([4]) == 8
   end
