@@ -49,15 +49,21 @@ defmodule HarryPotter do
     if Enum.all?(books, fn book -> Enum.member?(discount, book) end) do
       { false, books, discount }
     else
-      {books_not_eligible, books_eligible} = Enum.split_with(books, fn book -> Enum.member?(discount, book) end)
-      { true, books_not_eligible, List.flatten([books_eligible | discount])}
+      try_to_feed_discount(books, discount, [])
     end
-
   end
 
+  defp try_to_feed_discount([], discount, books_not_eligible) do
+    { true, books_not_eligible, discount }
+  end
 
-
-
+  defp try_to_feed_discount([book | tail], discount, books_not_eligible) do
+    if Enum.member?(discount, book) do
+      try_to_feed_discount(tail, discount, [book | books_not_eligible])
+    else
+      try_to_feed_discount(tail, [book | discount], books_not_eligible)
+    end
+  end
 
   def compute_reduc(unique_books) do
     

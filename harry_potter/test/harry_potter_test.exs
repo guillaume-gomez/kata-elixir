@@ -28,21 +28,18 @@ defmodule HarryPotterTest do
     assert HarryPotter.price([0, 1]) ==  expected_total
   end
 
-  @tag :skip
   test "cart with three different books" do
     expected_total = 8 * 3 * 0.9 # 21.6
 
     assert HarryPotter.price([0, 2, 4]) == expected_total
   end
 
-  @tag :skip
   test "cart with four different books" do
     expected_total = 8 * 4 * 0.8 # 25.6
 
     assert HarryPotter.price([0, 1, 2, 4]) == expected_total
   end
 
-  @tag :skip
   test "cart with five different books" do
     expected_total = 8 * 5 * 0.75 # 30
 
