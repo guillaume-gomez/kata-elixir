@@ -40,8 +40,8 @@ defmodule HarryPotter do
     if Enum.all?(books, fn book -> Enum.member?(discount, book) end) do
       { false, books, discount }
     else
-      {books_not_eligible, books_eligbible} = Enum.split_with(books, fn book -> Enum.member?(discount, book) end)
-      { true, books_not_eligible, [books_eligbible | discount]}
+      {books_not_eligible, books_eligible} = Enum.split_with(books, fn book -> Enum.member?(discount, book) end)
+      { true, books_not_eligible, [books_eligible | discount]}
     end
 
   end
