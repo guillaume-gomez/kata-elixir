@@ -26,7 +26,16 @@ defmodule HarryPotter do
   end
 
   defp price([] = _books, current_discount, discounts) do
-    discounts = [current_discount, discounts]
+    discounts = [current_discount| discounts]
+    Enum.map(discounts, fn discount -> 
+      case length(discount) do
+        1 -> 8
+        2 -> 2 * 8 * 0.95
+        3 -> 3 * 8 * 0.90
+        4 -> 4 * 8 * 0.80
+        5 -> 4 * 8 * 0.75
+      end
+    end) |> Enum.sum()
   end
 
   defp price(books, current_discount, discounts) do
@@ -41,7 +50,7 @@ defmodule HarryPotter do
       { false, books, discount }
     else
       {books_not_eligible, books_eligible} = Enum.split_with(books, fn book -> Enum.member?(discount, book) end)
-      { true, books_not_eligible, [books_eligible | discount]}
+      { true, books_not_eligible, List.flatten([books_eligible | discount])}
     end
 
   end
