@@ -22,7 +22,6 @@ defmodule HarryPotterTest do
     assert HarryPotter.price([4]) == 8
   end
 
-  @tag :skip
   test "cart with two different books" do
     expected_total = 8 * 2 * 0.95 # 15.2
 

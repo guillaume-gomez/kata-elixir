@@ -17,12 +17,40 @@ defmodule HarryPotter do
   giving as big a discount as possible.
   """
 
-  def price([]) do
-    0
+  def price([]), do: 0
+
+  def price([ _book ]), do: 8
+
+  def price(books) when is_list(books) do
+    price(books, [], [])
   end
 
-  def price([_]) do
-    8
+  defp price([] = _books, current_discount, discounts) do
+    discounts = [current_discount, discounts]
   end
 
+  defp price(books, current_discount, discounts) do
+    case try_to_feed_discount(books, current_discount) do
+      {false, _books, _current_discount} -> price(books, [], [current_discount | discounts])
+      {true, new_books, new_current_discount} -> price(new_books, new_current_discount, discounts)
+    end
+  end
+
+  defp try_to_feed_discount(books, discount) do
+    if Enum.all?(books, fn book -> Enum.member?(discount, book) end) do
+      { false, books, discount }
+    else
+      {books_not_eligible, books_eligbible} = Enum.split_with(books, fn book -> Enum.member?(discount, book) end)
+      { true, books_not_eligible, [books_eligbible | discount]}
+    end
+
+  end
+
+
+
+
+
+  def compute_reduc(unique_books) do
+    
+  end
 end
